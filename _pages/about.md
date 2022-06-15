@@ -3,6 +3,25 @@ permalink: /about/
 title: "About"
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+## Hi!
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+I'm Sarek.
+
+I recently delivered my [Master's thesis](SarekSkotåm_thesis.pdf), which is about a selection of
+[SAT solvers](https://en.wikipedia.org/wiki/SAT_solver) which I wrote in Rust, and then verified
+with [Creusot](https://github.com/xldenis/creusot). The source code of the solvers is available in
+the [CreuSAT](https://github.com/sarsko/CreuSAT) repository.
+
+I am currently working as a developer in the [Spark](https://www.volue.com/spark) team at [Volue](https://www.volue.com/),
+where we are building solutions to help power grid operators handle the increased complexity of a system with electric vehicles
+and distributed production of electricity.
+
+I am interested in most things programming &mdash; especially those which have a "pain in brain" feeling. Previously that need
+has been satisfied by things like C and CUDA, and recently it has been satisfied by Rust and formal methods, which I believe I
+will remain interested in for the foreseeable future.
+
+There is also some more information about me in my [CV](CV_SarekSkotåm.pdf).
+
+If you think I have written or said or done something stupid or smart or wrong, or you want to contact me for some other reason, then
+you can reach my by [mail](mailto:sarek.skotam@gmail.com), or send me a
+message on the [Rust Zulip](https://rust-lang.zulipchat.com/).

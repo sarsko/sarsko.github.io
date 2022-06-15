@@ -13,7 +13,7 @@ with [Creusot](https://github.com/xldenis/creusot). The source code of the solve
 the [CreuSAT](https://github.com/sarsko/CreuSAT) repository.
 
 I am currently working as a developer in the [Spark](https://www.volue.com/spark) team at [Volue](https://www.volue.com/),
-where we are building solutions to help power grid operators handle the increased complexity of a system with electric vehicles
+where we are building solutions to help power grid operators handle the increased complexity of a power system with electric vehicles
 and distributed production of electricity.
 
 I am interested in most things programming &mdash; especially those which have a "pain in brain" feeling. Previously that need

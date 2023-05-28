@@ -7,14 +7,13 @@ title: "About"
 
 I'm Sarek.
 
-I recently delivered my [Master's thesis](SarekSkotåm_thesis.pdf), which is about a selection of
+I currently work as an Applied Scientist in the S3 Automated Reasoning Group (S3-ARG), where I do Rust and model checking and stuff. It's a lot of fun. 
+
+Before I joined S3-ARG, I did a pretty good [Master's thesis](SarekSkotåm_thesis.pdf) (best thesis I ever wrote, at least. It also won the Norwegian Computing Central [**best thesis award**](https://nr.no/2023/03/15/vinnere-av-nr-prisen-2022/#sarekskot%C3%A5m), which is really cool.). It is about a selection of
 [SAT solvers](https://en.wikipedia.org/wiki/SAT_solver) which I wrote in Rust, and then verified
 with [Creusot](https://github.com/xldenis/creusot). The source code of the solvers is available in
 the [CreuSAT](https://github.com/sarsko/CreuSAT) repository.
 
-I am currently working as a developer in the [Spark](https://www.volue.com/spark) team at [Volue](https://www.volue.com/),
-where we are building solutions to help power grid operators handle the increased complexity of a power system with electric vehicles
-and distributed production of electricity.
 
 I am interested in most things programming &mdash; especially those which have a "pain in brain" feeling. Previously that need
 has been satisfied by things like C and CUDA, and recently it has been satisfied by Rust and formal methods, which I believe I

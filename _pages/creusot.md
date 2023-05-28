@@ -1,6 +1,6 @@
 ---
 title: "Creusot"
-permalink: /creusot/
+permalink: /Creusot/
 layout: posts
 author_profile: true
 ---

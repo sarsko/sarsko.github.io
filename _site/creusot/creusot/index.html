@@ -113,7 +113,7 @@
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/creusot/">Creusot</a>
+              <a href="/Creusot/">Creusot</a>
             </li><li class="masthead__menu-item">
               <a href="/about/">About</a>
             </li><li class="masthead__menu-item">
@@ -165,7 +165,7 @@
     </h3>
     
       <div class="author__bio p-note" itemprop="description">
-        <p>Norwegian programmer. Into Rust and formal methods. Author of <a href="https://github.com/sarsko/CreuSAT">CreuSAT</a>.</p>
+        <p>Norwegian programmer. Into Rust and formal methods. Author of <a href="https://github.com/sarsko/CreuSAT">CreuSAT</a>. Working at AWS.</p>
 
       </div>
     
@@ -283,7 +283,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          8 minute read
+          15 minute read
         
       </span>
     
@@ -323,11 +323,36 @@ don’t have to become an expert at verifying SAT solvers if you don’t want to
 
 <h3 id="verification-can-be-painful">Verification can be painful</h3>
 
+<p>I have found formal verification to be an entirely new kind of pain, and I believe this is part of the draw of formal verification.</p>
+
+<p>Most things in programming are some hybrid between a search procedure and a logic puzzle. For instance:</p>
+<ul>
+  <li>When doing “regular programming”, it is usually possible to find the solution to your problem on StackOverflow or in the documentation for
+whatever programming language or framework or API or whatever which you are trying to get to work.</li>
+  <li>In the case you are debugging, you are searching for some bug, and using logic to prune the search space.</li>
+  <li>When doing some low level stuff or working with the internals of some external tool, the process may be harder, but the answer is still in the code (or in 
+<a href="https://www.ctyme.com/rbrown.htm">Ralf Brown’s interrupt list</a>).</li>
+</ul>
+
+<p>When we are doing a program proof, we are still doing a hybrid between a search procedue and a logic puzzle. There are howevever two importan differences.
+The first is that we are searching for two things at once: a program which does what we want, and a proof which is able to prove that program. The second is
+that the answer can only be found somewhere within our head — there is no answer on StackOverflow, or some library function which we can call. This is
+also why I believe the pain is part of the draw of formal verification. When we found a solution, we didn’t just look it up, we had to conjure it in our mind.
+If we did not immediately find the proof, this means that we most likely ended up learning something, and that something was, I would argue, much more fundamental
+than knowing what interrupt to invoke or what API endpoint to connect to.</p>
+
 <h3 id="verification-can-be-hard">Verification can be hard</h3>
+
+<h3 id="verification-can-be-tedious">Verification can be tedious</h3>
 
 <h3 id="verification-can-be-fun">Verification can be fun</h3>
 
+<p>I have already touched on this in the section about pain, but the satisfaction which can be gotten from doing proofs is really quite addictive. People aren’t attending
+VerifyThis or adding proof to the Isabelle Archive of Proofs just because they want to acquire the begrudging admiration of a few nerds — they do, as wicked as it may
+seem, actually think doing proofs is <em>fun</em>.</p>
 <h3 id="verification-can-be-useful">Verification can be useful</h3>
+
+<p>Okay, this is obviously a joke. Haha.</p>
 
 <h2 id="introduction">Introduction</h2>
 
@@ -340,6 +365,16 @@ don’t have to become an expert at verifying SAT solvers if you don’t want to
 <h2 id="some-tips">Some tips</h2>
 
 <h3 id="be-nice-to-the-smt-solvers">Be nice to the SMT solvers</h3>
+
+<p>The SMT solvers are your judge. They are in some ways really smart, and in some ways really dumb. If you find yourself asking: “Do I really have to spell it
+out for you”, then yes, yes you should. Sometimes this means that you have to break abstraction barriers, which is really <em>not nice</em>, but if that is what it
+takes to make the SMT solvers happy, then we’ll have to do it for now, and fix it later. The same applies when writing your invariants and your specs. If we
+can reword the invariant to not take a quantifier, for instance by doing a change in the proof, then we should probably do that.</p>
+
+<h3 id="know-your-program">Know your program</h3>
+
+<p>Sometimes, especially when starting out, our ability to do program proofs is limited by our lack of expertise in using Creusot. As we get better, this becomes
+much more rare, and our ability to do program proofs becomes more and more limited by our lack of expertise in the program which we are going to prove.</p>
 
 <h3 id="good-software-practice-is-great-creusot-practice">Good software practice is great Creusot practice</h3>
 
@@ -480,13 +515,13 @@ times faster.</p>
 
 <p>The hierarchy, more or less. Sure, there may be cases where proving termination is more important than even correctness or safety:</p>
 <ol>
-  <li>Useful and statically proven safety, correctness, completeness, and termination</li>
-  <li>Useful and statically proven safety, correctness, and either completeness or termination</li>
-  <li>Useful and statically proven safety and correctness</li>
-  <li>Useful with runtime checks and statically proven correctness and termination</li>
-  <li>Useful with runtime checks and statically proven correctness</li>
-  <li>Useful with type safety</li>
-  <li>Useless. Who cares what you have proven, your program is useless</li>
+  <li>Useful and statically proven safety, correctness, completeness, and termination.</li>
+  <li>Useful and statically proven safety, correctness, and either completeness or termination.</li>
+  <li>Useful and statically proven safety and correctness.</li>
+  <li>Useful with runtime checks and statically proven correctness and termination.</li>
+  <li>Useful with runtime checks and statically proven correctness.</li>
+  <li>Useful with type safety.</li>
+  <li>Useless. Who cares what you have proven, your program is useless.</li>
 </ol>
 
 <h2 id="more-advanced-topics">More advanced topics</h2>
@@ -494,6 +529,31 @@ times faster.</p>
 <h3 id="lemma-functions">Lemma functions</h3>
 
 <h4 id="pro-tip-lemmas-as-tests">Pro tip: Lemmas as tests</h4>
+
+<p>This is a concept which I realized a bit late, and which I utilized less than I should, but it is a
+very powerful concept, which greatly improves the process of refactoring code.</p>
+
+<p>The idea is really simple: we can use lemmas to test abstract properties which should hold, such as that pushing and poping to a vector
+returns the same vector, or that taking the absolute value of a number multiple times is the same as doing it once. A key thing here is
+that lemmas should, to the degree it is possible, work on the abstractions of the data structures. This means that if we ever refactor our
+data structures, for instance by swapping a vector representation to a set representation, either our lemmas will break, in which case we
+can make the choice to either fix them (or the implementation) or remove them, or they will continue passing, in which case our refactoring
+was sound.</p>
+
+<p>Lemma tests should be designed to be faster to prove than the rest of the proof (it is fine to have lemmas which take
+more time to prove, and which are run less often), and are used to quickly check whether a given refactoring is correct, or
+if some change to Creusot breaks some core functionality. They should (for the most part) be entirely independent of the functionality
+of the program, and be used to test invariants of the data structures and their associated functions.</p>
+
+<p>Lemma tests should be in a separate file and should always be private, to ensure that they are not accidentally used in the proof. Ideally one
+should use <code class="language-plaintext highlighter-rouge">#[cfg_attr(feature = "no_tests", trusted)]</code> or <code class="language-plaintext highlighter-rouge">#[cfg(feature = "test")]</code> to not have to run them every single time the proof is run.</p>
+
+<p><strong>Lemma driven development?</strong></p>
+
+<p>The natural follow-up to using lemmas as tests is whether “lemma driven development” is a good idea or not. I do not know — I have not tried.
+Though I do believe that doing a sort of “contract driven development” sometimes is a good idea, I have never thought “Oh, I should do “lemma driven development””.
+A variant of this, which I have done, is to specify a lemma which does not prove, but which I believe should prove, and then use that, and then later
+fill inn the rest of the lemma, but this is not exactly the same.</p>
 
 <h3 id="reaching-up-to-why3">“Reaching up” to Why3</h3>
 
@@ -507,12 +567,57 @@ times faster.</p>
 
 <h2 id="some-practical-tips-and-tricks-for-using-creusot">Some practical tips and tricks for using Creusot</h2>
 
-<h3 id="pass-through">Pass-through</h3>
+<h3 id="pass-through-and-cfgfeature--contracts">Pass-through and <code class="language-plaintext highlighter-rouge">#[cfg(feature = "contracts")]</code>`</h3>
+
+<p>All calls to <code class="language-plaintext highlighter-rouge">cargo creusot</code> in CreuSAT which are done through the <code class="language-plaintext highlighter-rouge">cargo make</code> commands are done with the <code class="language-plaintext highlighter-rouge">--features=contracts</code>,
+which includes the parts which are only used for the proofs, such as defining models for various data structures, or including
+the files which have the <code class="language-plaintext highlighter-rouge">logic_</code> prefix. This enables pass through when running regular <code class="language-plaintext highlighter-rouge">cargo</code> commands, as things like defining
+models will cause the compiler to error otherwise. Before pass-through mode was enabled, I would maintain a mirrored version of the
+solvers, which was <em>super not nice</em>, and something which I would <em>not recommend</em>.</p>
 
 <h3 id="using-cargo-make-or-aliasing-mlcfg-and-why3-ide">Using cargo make (or aliasing mlcfg and why3-ide)</h3>
 
-<h3 id="using-cfgcontracts-and-trusted">Using cfg(contracts) and #[trusted]</h3>
+<h3 id="using-cfg_attrfeature--trust_assignments-trusted-and-trusted">Using <code class="language-plaintext highlighter-rouge">#[cfg_attr(feature = "trust_assignments", trusted)] and </code>#[trusted]`</h3>
 
+<p>If you look at the source code of CreuSAT, you will see that most of the functions are annotated by something similar to
+<code class="language-plaintext highlighter-rouge">#[cfg_attr(feature = "trust_assignments", trusted)]</code>. This allows us to run <code class="language-plaintext highlighter-rouge">cargo creusot</code> with <code class="language-plaintext highlighter-rouge">--features=trust_assignments</code>
+and have all the functions which have this annotation be trusted, and thus removed from the generated MLCFG. This means that
+we can load only the functions which we are currently trying to prove, thereby reducing the iteration time. Be wary of adding
+permanent <code class="language-plaintext highlighter-rouge">#[trusted]</code> annotations to functions, as you risk forgetting about them.</p>
+
+<h3 id="the-strict-resource-count-discipline">The “strict resource count” discipline</h3>
+
+<p>All right, so this is a bit of a TODO as I need to dirty my hands a lot more.</p>
+
+<p>This is an idea / discipline which I got introduced to from the people doing proofs in Dafny, and which is described to some degree in some of the more recent papers about program proofs in Dafny.</p>
+
+<p>The idea is very simple:</p>
+<ol>
+  <li>Keep track of how much “resources” (some abstract Resource Count (RC)) each verification condition requires to pass.</li>
+  <li>Maintain the following two invariants:
+    <ol>
+      <li>All VCs should pass within some resouce bound.</li>
+      <li>Regressions (ie. RC<sub>new</sub> * 1.5 &gt;= RC<sub>prev</sub>) == proof failure.</li>
+    </ol>
+  </li>
+</ol>
+
+<p>The resource bound should be set such that it is significantly below the timeout limit for the SMT solvers.</p>
+
+<p>The discipline is nice, because it ensures that <strong>proofs always pass</strong>.</p>
+
+<p>The first invariant solves the following somewhat common issue:</p>
+<ol>
+  <li>Some VC takes a lot of time. It should be split up, but you can’t be bothered, because, hey, it is passing after all.</li>
+</ol>
+
+<p>The second invariant solves the following (unfortunately common) issues:</p>
+<ol>
+  <li>You do some refactoring. Seemingly unrelated parts of the proof now take more time.</li>
+  <li>You update your SMT solvers. Some VCs now take more time.</li>
+</ol>
+
+<p>In short: such a discipline is the only way I know of which ensures that you don’t get encumbered by <em>proof debt</em>, which at some point makes your proof basically impossible to work with.</p>
 
         
       </section>
@@ -605,7 +710,7 @@ times faster.</p>
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2022 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2023 . Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

@@ -58,7 +58,7 @@ plugins:
 author:
   name   : "Sarek Skotåm"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "Norwegian programmer. Into Rust and formal methods. Author of [CreuSAT](https://github.com/sarsko/CreuSAT)."
+  bio    : "Norwegian programmer. Into Rust and formal methods. Author of [CreuSAT](https://github.com/sarsko/CreuSAT). Working at AWS."
   links:
     - label: "CreuSAT"
       icon: "fas fa-fw fa-link"
